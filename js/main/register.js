@@ -4,12 +4,12 @@ form.addEventListener("submit", async function (e) {
     e.preventDefault();
 
 
-const name = document.getElementById("username").value;
+const name = document.getElementById("name").value;
 const email = document.getElementById("email").value;
 const password = document.getElementById("password").value;
 
 const userData = {
-    username: name,
+    name: name,
     email: email,
     password: password
 };
