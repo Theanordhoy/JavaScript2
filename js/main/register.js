@@ -27,6 +27,7 @@ try {
 
     if (response.ok) {
         alert("Registration was successfull, you can now log in!");
+        window.location.href = "../../index.html";
     } else {
         console.log("Raw error response:", data);
         alert("Registration failed: " + (data.errors?.[0]?.message || "Check console for details"));
