@@ -113,6 +113,21 @@ a:focus {
     margin: 30px 0px;
 }
 
+/*Footer*/
+
+footer {
+    background-color: var(--secondary-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+.logo-footer {
+    color: var(--primary-color);
+    margin: 20px 0;
+}
+
 /* Tablet and Desktop */
 @media (min-width: 768px) {
     /* Header */
