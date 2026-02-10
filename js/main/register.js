@@ -25,17 +25,14 @@ try {
 
     const data = await response.json()
 
-    if (response.ok) {
-        alert("Registration was successfull, you can now log in!");
-        window.location.href = "../../index.html";
-    } else {
-        console.log("Raw error response:", data);
-        alert("Registration failed: " + (data.errors?.[0]?.message || "Check console for details"));
-    }
+    if (!response.ok) {
+        throw new Error(data.errors?.[0]?.message || "Check console for details");
+    } 
 
-    }catch (error) {
+    alert("Registration was successfull, you can now log in!")
+    window.location.href = "../../index.html";
+    } catch (error) {
         console.error("Registration error:", error);
         alert("Something went wrong. Please try again later.");
     }
-
 });
