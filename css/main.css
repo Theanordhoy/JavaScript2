@@ -115,6 +115,7 @@ a:focus {
 
 /* Tablet and Desktop */
 @media (min-width: 768px) {
+    /* Header */
     .navbar-links {
         display: flex;
         gap: 20px;
