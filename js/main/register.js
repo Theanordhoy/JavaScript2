@@ -8,13 +8,29 @@ import {
 //DOM references
 const form = document.getElementById("registerForm");
 
-const nameInput = document.getElementById("name").value;
-const emailInput = document.getElementById("email").value;
-const passwordInput = document.getElementById("password").value;
+const nameInput = document.getElementById("name");
+const emailInput = document.getElementById("email");
+const passwordInput = document.getElementById("password");
 
 const nameError = document.getElementById("nameError");
 const emailError = document.getElementById("emailError");
 const passwordError = document.getElementById("passwordError");
+
+// Live Validation
+nameInput.addEventListener("blur", () => {
+    const result = isValidName(nameInput.value);
+    nameError.textContent = result.message;
+});
+
+emailInput.addEventListener("blur", () => {
+    const result = isValidEmail(emailInput.value);
+    emailError.textContent = result.message;
+});
+
+passwordInput.addEventListener("blur", () => {
+    const result = isValidPassword(passwordInput.value);
+    passwordError.textContent = result.message;
+});
 
 //Submit Event
 form.addEventListener("submit", async function (e) {
