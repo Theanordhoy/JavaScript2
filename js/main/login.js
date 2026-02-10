@@ -1,14 +1,44 @@
+import { isValidEmail, isValidPassword } from "../utils/validation.js";
+
+// DOM references
 const form = document.getElementById("loginForm");
 
+const emailInput = document.getElementById("email");
+const passwordInput = document.getElementById("password");
+
+const emailError = document.getElementById("emailError");
+const passwordError = document.getElementById("passwordError");
+
+// Live Validation
+emailInput.addEventListener("blur", () => {
+    const result = isValidEmail(emailInput.value);
+    emailError.textContent = result.message;
+});
+
+passwordInput.addEventListener("blur", () => {
+    const result = isValidPassword(passwordInput.value);
+    passwordError.textContent = result.message;
+});
+
+// Submit Event
 form.addEventListener("submit", async function (e) {
     e.preventDefault();
 
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
+    // Validation
+    const emailCheck = isValidEmail(emailInput.value);
+    const passwordCheck = isValidPassword(passwordInput.value);
+
+    // Show error-messages if needed
+    emailError.textContent = emailCheck.message;
+    passwordError.textContent = passwordCheck.message;
+
+    if (!emailCheck.valid || !passwordCheck.valid) {
+        return; // Stops before API
+    }
 
     const credentials = {
-        email: email,
-        password: password
+        email: emailInput.value.trim(),
+        password: passwordInput.value.trim()
     };
 
     try {
@@ -23,12 +53,12 @@ form.addEventListener("submit", async function (e) {
         const data = await response.json();
 
         if (!response.ok) {
-            const message = data?.errors?.[0]?.message || "Login failed. Check console for details.";
-            throw new Error(message);
+            throw new Error(data?.errors?.[0]?.message || "Login failed.");
         }
 
         localStorage.setItem("accessToken", data.data.accessToken);
         localStorage.setItem("username", data.data.name);
+
         alert("Login successful!");
         window.location.href = "../../feed.html";
         
