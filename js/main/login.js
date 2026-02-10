@@ -22,15 +22,16 @@ form.addEventListener("submit", async function (e) {
 
         const data = await response.json();
 
-        if (response.ok) {
-            localStorage.setItem("accessToken", data.data.accessToken);
-            localStorage.setItem("username", data.data.name);
-            alert("Login successful!");
-            window.location.href = "../../feed.html";
-        } else {
-            console.log("Login error:", data);
-            alert("Login failed:" + (data.errors?.[0]?.message || "Check console for details."));
+        if (!response.ok) {
+            const message = data?.errors?.[0]?.message || "Login failed. Check console for details.";
+            throw new Error(message);
         }
+
+        localStorage.setItem("accessToken", data.data.accessToken);
+        localStorage.setItem("username", data.data.name);
+        alert("Login successful!");
+        window.location.href = "../../feed.html";
+        
     } catch (error) {
         console.error("Login request failed:", error);
         alert("Something went wrong. Try again later.");
