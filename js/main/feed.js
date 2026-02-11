@@ -94,4 +94,69 @@ function renderPosts(posts) {
     });
 }
 
+// Search function for posts based on title and body using the API's search endpoint
+async function searchPosts(query) {
+    try {
+        const token = localStorage.getItem("accessToken");
+
+        if (!token) {
+            throw new Error("No access token found. Please log in.");
+        }
+
+        const response = await fetch(`${apiURL}/search?q=${encodeURIComponent(query)}`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "X-Noroff-API-Key": '143a7d73-1893-43f4-bca0-8f81d8e2443f'
+            }
+        });
+
+        if(!response.ok) {
+            throw new Error("Failed to search posts.");
+        }
+
+        const data = await response.json();
+        renderPosts(data.data);
+
+    } catch (error) {
+        console.error("Error searching posts:", error);
+    }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    const searchInput = document.getElementById("searchPosts");
+    const searchButton = document.getElementById("searchButton");
+
+    // Search button click event
+    searchButton.addEventListener("click", () => {
+        const query = searchInput.value.trim();
+        console.log("Search query:", query);
+        if (query) {
+            searchPosts(query);
+        } else {
+            fetchPosts();
+        }
+    });
+
+    // Allows pressing Enter to trigger search
+    searchInput.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+            e.preventDefault();
+            const query = searchInput.value.trim();
+            if (query) {
+                searchPosts(query);
+            } else {
+                fetchPosts();
+            }
+        }
+    });
+
+    // Removes search results when input is cleared
+    searchInput.addEventListener("input", () => {
+        if (searchInput.value.trim() === "") {
+            fetchPosts();
+        }
+    });
+});
+
+
 fetchPosts();
