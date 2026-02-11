@@ -23,7 +23,6 @@
     --text-color: #111827;
 
     --hoover-color: #1D4ED8;
-
 }
 
 body {
@@ -50,6 +49,10 @@ h2,
 
 p {
     font-family: var(--primary-font);
+}
+
+p {
+    color: var(--text-color);
 }
 
 /* Header */
@@ -114,7 +117,6 @@ a:focus {
 }
 
 /*Footer*/
-
 footer {
     background-color: var(--secondary-color);
     display: flex;
