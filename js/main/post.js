@@ -40,8 +40,58 @@ function renderSinglePost(post) {
     container.innerHTML = "";
 
     const postCard = document.createElement("div");
+    postCard.className = "post-card";
+
+     //Author
+    if (post.author) {
+        const authorSection = document.createElement("div");
+        const authorName = document.createElement("p");
+
+         if(post.author.avatar?.url) {
+            const avatar = document.createElement("img");
+            avatar.src = post.author.avatar.url;
+            avatar.alt = post.author.avatar.alt || "Author Avatar";
+            avatar.className = "author-avatar";
+            authorSection.appendChild(avatar);
+        }
+
+        authorSection.className = "post-author";
+        authorName.textContent = post.author.name || "Unknown";
+        authorSection.appendChild(authorName);
+
+        postCard.appendChild(authorSection);
+    }
+
+    //Title
     const postTitle = document.createElement("h2");
+    postTitle.className = "post-title";
+    postTitle.textContent = post.title || "Untitled Post";
+    postCard.appendChild(postTitle);
+
+    //Body
     const postBody = document.createElement("p");
+    postBody.className = "post-body";
+    postBody.textContent = post.body || "";
+    postCard.appendChild(postBody);
+
+    //Tags
+     if (post.tags?.length) {
+        const postTags = document.createElement("p");
+        postTags.className = "post-tags";
+        postTags.textContent = `#${post.tags.join(" #")}`;
+        postCard.appendChild(postTags);
+    }
+
+    //Image
+      if (post.media?.url) {
+        const postImage = document.createElement("img");
+        postImage.src = post.media.url;
+        postImage.alt = post.media.alt || "Post Image";
+        postImage.className = "post-image";
+        postCard.appendChild(postImage);
+    }
+
+    //Meta
     const postMeta = document.createElement("div");
     const postComments = document.createElement("span");
     const postCommentsIcon = document.createElement("i");
@@ -50,9 +100,6 @@ function renderSinglePost(post) {
     const postDate = document.createElement("span");
     const postDateIcon = document.createElement("i");
 
-    postCard.className = "post-card";
-    postTitle.className = "post-title";
-    postBody.className = "post-body";
     postMeta.className = "post-meta";
     postComments.className = "post-comments";
     postCommentsIcon.className = "fa-regular fa-comment";
@@ -61,8 +108,6 @@ function renderSinglePost(post) {
     postDate.className = "post-date";
     postDateIcon.className = "fa-regular fa-clock";
 
-    postTitle.textContent = post.title || "Untitled Post";
-    postBody.textContent = post.body || "";
 
     postComments.appendChild(postCommentsIcon);
     postComments.append(`${post._count?.comments || 0}`);
@@ -77,78 +122,50 @@ function renderSinglePost(post) {
     postMeta.appendChild(postReactions);
     postMeta.appendChild(postDate);
 
-    postCard.appendChild(postTitle);
-    postCard.appendChild(postBody);
     postCard.appendChild(postMeta);
+   
 
-    //Image
-    if (post.media?.url) {
-        const postImage = document.createElement("img");
-        postImage.src = post.media.url;
-        postImage.alt = post.media.alt || "Post Image";
-        postImage.className = "post-image";
-        postCard.appendChild(postImage);
-    }
+    //Comments list
+        const commentsSection = document.createElement("div");
+        const commentsTitle = document.createElement("h3")
 
-    //Tags
-    if (post.tags?.length) {
-        const postTags = document.createElement("p");
-        postTags.className = "post-tags";
-        postTags.textContent = `#${post.tags.join(" #")}`;
-        postCard.appendChild(postTags);
-    }
+        commentsSection.className = "comments-section";
+        commentsTitle.textContent = "Comments";
 
-    container.appendChild(postCard);
+        commentsSection.appendChild(commentsTitle);
 
-    //Author
-    if (post.author) {
-        const authorSection = document.createElement("div");
-        const authorTitle = document.createElement("h3");
-        const authorName = document.createElement("p");
-
-        authorSection.className = "post-author";
-        authorTitle.textContent = "Author";
-        authorName.textContent = post.author.name || "Unknown";
-
-        authorSection.appendChild(authorTitle);
-        authorSection.appendChild(authorName);
-
-        if(post.author.avatar?.url) {
+        if (post.comments?.length) {
+            post.comments.forEach(comment => {
+                
+                const commentItem = document.createElement("div");
+                commentItem.className = "comment-item";
+         
+        //Avatar
+        if (comment.author?.avatar?.url) {
             const avatar = document.createElement("img");
-            avatar.src = post.author.avatar.url;
-            avatar.alt = post.author.avatar.alt || "Author Avatar";
-            avatar.className = "author-avatar";
-            authorSection.appendChild(avatar);
+            avatar.src = comment.author.avatar.url;
+            avatar.alt = comment.author.avatar.alt || "User avatar";
+            avatar.className = "comment-avatar";
+            commentItem.appendChild(avatar);
         }
 
-        container.appendChild(authorSection);
-    }
+        //Name and comment
+        const text = document.createElement("span");
+        text.textContent = `${comment.author?.name || "Anonymous"}: ${comment.body}`;
 
-    //Comments
-    const commentsSection = document.createElement("div");
-    const commentsTitle = document.createElement("h3");
-
-    commentsSection.className = "comments-section";
-    commentsTitle.textContent = "Comments";
-
-    commentsSection.appendChild(commentsTitle);
-
-    if (post.comments?.length) {
-        post.comments.forEach(comment => {
-            const commentItem = document.createElement("p");
-            commentItem.className = "comment-item";
-            commentItem.textContent = `${comment.author?.name || "Anonymous"}: ${comment.body}`;
-
-            commentsSection.appendChild(commentItem);
-        });
-    } else {
+        commentItem.appendChild(text);
+        commentsSection.appendChild(commentItem);
+    });
+    
+    }  else {
         const noComments = document.createElement("p");
         noComments.textContent = "No comments yet.";
         commentsSection.appendChild(noComments);
     }
 
-    container.appendChild(commentsSection);
-}   
+    postCard.appendChild(commentsSection);
+    container.appendChild(postCard);
+}
 
 fetchSinglePost();
 

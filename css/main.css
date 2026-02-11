@@ -130,6 +130,58 @@ footer {
     margin: 20px 0;
 }
 
+/*Feed and post*/
+
+.post-card {
+    width: 600px;
+    background-color: var(--secondary-color);
+    margin: 20px auto;
+    padding: 40px 30px;
+}
+
+.post-image {
+    width: 600px;
+    height: 400px;
+    object-fit: cover;
+}
+
+.post-title {
+    font-weight: var(--font-weight-semibold);
+    margin-top: 0;
+}
+
+.post-title,
+.post-meta {
+    color: var(--text-color);
+}
+
+.post-meta {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+i {
+    color: var(--primary-color);
+}
+
+/*Single post*/
+.post-author {
+    display: flex;
+    align-items: center;
+}
+.author-avatar {
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+}
+
+.comment-avatar {
+    border-radius: 50%;
+    height: 20px;
+    width: 20px;
+}
+
 /* Tablet and Desktop */
 @media (min-width: 768px) {
     /* Header */
