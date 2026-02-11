@@ -1,0 +1,12 @@
+.post-card {
+    width: 600px;
+    background-color: var(--secondary-color);
+    margin: 20px auto;
+    padding: 20px;
+}
+
+.post-image {
+    width: 600px;
+    height: 400px;
+    object-fit: cover;
+}
