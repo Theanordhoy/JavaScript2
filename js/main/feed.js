@@ -35,7 +35,6 @@ function renderPosts(posts) {
 
     posts.forEach(post => {
         const postCard = document.createElement("div");
-        const postContent = document.createElement("div");
         const postTitle = document.createElement("h2");
         const postBody = document.createElement("p");
         const postMeta = document.createElement("div");
@@ -44,40 +43,34 @@ function renderPosts(posts) {
         const postReactions = document.createElement("span");
         const postReactionsIcon = document.createElement("i");
         const postDate = document.createElement("span");
-        const PostDateIcon = document.createElement("i");
+        const postDateIcon = document.createElement("i");
         const anchor = document.createElement("a");
 
         postCard.className = "post-card";
-        postContent.className = "post-content";
         postTitle.className = "post-title";
         postBody.className = "post-body";
         postMeta.className = "post-meta";
         postComments.className = "post-comments";
         postCommentsIcon.className = "fa-regular fa-comment";
         postReactions.className = "post-reactions";
-        postReactionsIcon.className = "fa-regular fa-heart";
+        postReactionsIcon.className = "fa-regular fa-face-smile";
         postDate.className = "post-date";
-        PostDateIcon.className = "fa-regular fa-clock";
+        postDateIcon.className = "fa-regular fa-clock";
 
         postTitle.textContent = post.title || "Untitled Post";
         postBody.textContent = post.body || "";
         anchor.href = `post.html?id=${post.id}`;
-
-        postComments.appendChild(postCommentsIcon);
-        postComments.append(` ${post._count.comments}`);
-        postReactions.appendChild(postReactionsIcon);
-        postReactions.append(` ${post._count.reactions}`);
-        postDate.appendChild(PostDateIcon);
-        postDate.append(` ${new Date(post.created).toLocaleDateString()}`);
         
-        postContent.appendChild(postTitle);
-        postContent.appendChild(postBody);
-        postMeta.appendChild(postComments);
-        postMeta.appendChild(postReactions);
-        postMeta.appendChild(postDate);
-        postContent.appendChild(postMeta);
-        postCard.appendChild(postContent);
+        postCard.appendChild(postTitle);
+        postCard.appendChild(postBody);
         anchor.appendChild(postCard);
+
+        if (post.tags?.length) {
+            const postTags = document.createElement("p");
+            postTags.className = "post-tags";
+            postTags.textContent = `#${post.tags.join(" #")}`;
+            postCard.appendChild(postTags);
+        }
 
         if (post.media?.url) {
             const postImage = document.createElement("img");
@@ -87,13 +80,16 @@ function renderPosts(posts) {
             postCard.appendChild(postImage);
         }
 
-        if (post.tags?.length) {
-            const postTags = document.createElement("p");
-            postTags.className = "post-tags";
-            postTags.textContent = `#${post.tags.join(" #")}`;
-            postContent.appendChild(postTags);
-        }
-        
+        postComments.appendChild(postCommentsIcon);
+        postComments.append(` ${post._count.comments}`);
+        postReactions.appendChild(postReactionsIcon);
+        postReactions.append(` ${post._count.reactions}`);
+        postDate.appendChild(postDateIcon);
+        postDate.append(` ${new Date(post.created).toLocaleDateString()}`);
+        postMeta.appendChild(postComments);
+        postMeta.appendChild(postReactions);
+        postMeta.appendChild(postDate);
+        postCard.appendChild(postMeta);
         postsContainer.appendChild(anchor);
     });
 }

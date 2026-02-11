@@ -2,11 +2,31 @@
     width: 600px;
     background-color: var(--secondary-color);
     margin: 20px auto;
-    padding: 20px;
+    padding: 40px 30px;
 }
 
 .post-image {
     width: 600px;
     height: 400px;
     object-fit: cover;
+}
+
+.post-title {
+    font-weight: var(--font-weight-semibold);
+    margin-top: 0;
+}
+
+.post-title,
+.post-meta {
+    color: var(--text-color);
+}
+
+.post-meta {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+i {
+    color: var(--primary-color);
 }
