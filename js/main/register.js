@@ -1,9 +1,7 @@
 //Import
-import {
-    isValidName,
-    isValidEmail,
-    isValidPassword
-} from "../utils/validation.js";
+import {isValidName, isValidEmail, isValidPassword} from "../utils/validation.js";
+import { registerUser } from "../api/auth.js";
+
 
 //DOM references
 const form = document.getElementById("registerForm");
@@ -56,23 +54,12 @@ form.addEventListener("submit", async function (e) {
     password: passwordInput.value.trim()
     };
 
-try {
-    const response = await fetch("https://v2.api.noroff.dev/auth/register", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(userData)
-    });
 
-    const data = await response.json();
+    try {
+        await registerUser(userData);
 
-    if (!response.ok) {
-        throw new Error(data.errors?.[0]?.message || "Registration failed, check console for details");
-    } 
-
-    alert("Registration was successfull, you can now log in!")
-    window.location.href = "../../index.html";
+        alert("Registration was successfull, you can now log in!")
+        window.location.href = "../../index.html";
 
     } catch (error) {
         console.error("Registration error:", error);
