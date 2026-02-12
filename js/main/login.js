@@ -1,4 +1,5 @@
 import { isValidEmail, isValidPassword } from "../utils/validation.js";
+import { loginUser } from "../api/auth.js";
 
 // DOM references
 const form = document.getElementById("loginForm");
@@ -42,28 +43,17 @@ form.addEventListener("submit", async function (e) {
     };
 
     try {
-        const response = await fetch("https://v2.api.noroff.dev/auth/login", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(credentials)
-        });
+        const data = await loginUser(credentials);
 
-        const data = await response.json();
-
-        if (!response.ok) {
-            throw new Error(data?.errors?.[0]?.message || "Login failed.");
-        }
-
+        //save token + username
         localStorage.setItem("accessToken", data.data.accessToken);
         localStorage.setItem("username", data.data.name);
 
         alert("Login successful!");
         window.location.href = "../../feed.html";
-        
+
     } catch (error) {
-        console.error("Login request failed:", error);
+         console.error("Login request failed:", error);
         alert("Something went wrong. Try again later.");
     }
 });
