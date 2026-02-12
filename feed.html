@@ -36,6 +36,16 @@
             <button id="searchButton" type="button">Search</button>
         </form>
         <h1>Feed</h1>
+        <button id="createPostButton">+ Create new post</button>
+        <form id="createPostForm" class="create-post-form">
+            <label for="postTitle" class="sr-only">Post Title</label>
+            <input type="text" id="postTitle" name="title" placeholder="Post title" required>
+            <label for="postBody" class="sr-only">Post content</label>
+            <textarea id="postBody" name="body" placeholder="What's on your mind?" required></textarea>
+            <label for="postImageUrl" class="sr-only">Image URL(optional)</label>
+            <input type="url" id="postImageUrl" name="image" placeholder="Image URL (optional)">
+            <button type="submit">Publish post</button>
+        </form>
         <div id="postsContainer" class="post-container"></div>
     </main>
     <footer>

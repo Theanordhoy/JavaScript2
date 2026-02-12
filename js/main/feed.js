@@ -122,9 +122,38 @@ async function searchPosts(query) {
     }
 }
 
+async function createPost(postData) {
+    try {
+        const token = localStorage.getItem("accessToken");
+
+        const response = await fetch(apiURL, {
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "X-Noroff-API-Key": '143a7d73-1893-43f4-bca0-8f81d8e2443f',
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(postData)
+        });
+
+        if (!response.ok) {
+            throw new Error("Failed to create post.");
+        }
+
+        const data = await response.json();
+        console.log("Post created:", data);
+        fetchPosts();
+    } catch (error) {
+        console.error("Error creating post:", error);
+    }
+
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     const searchInput = document.getElementById("searchPosts");
     const searchButton = document.getElementById("searchButton");
+    const createPostButton = document.getElementById("createPostButton");
+    const createPostForm = document.getElementById("createPostForm");
 
     // Search button click event
     searchButton.addEventListener("click", () => {
@@ -156,6 +185,46 @@ document.addEventListener("DOMContentLoaded", () => {
             fetchPosts();
         }
     });
+
+    // Show create post form when button is clicked
+    createPostButton.addEventListener("click", () => {
+        if (createPostForm.style.display === "none") {
+            createPostForm.style.display = "block";
+            createPostButton.textContent = "Cancel";
+        } else {
+            createPostForm.style.display = "none";
+            createPostButton.textContent = "+ Create new post";
+        }
+    });
+
+    // Handle create post form submission
+    createPostForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const title = document.getElementById("postTitle").value.trim();
+        const body = document.getElementById("postBody").value.trim();
+        const imageUrl = document.getElementById("postImageUrl").value.trim();
+
+        const newPost = {
+            title
+        };
+        if (!title) {
+            alert("Title is required to create a post.");
+            return;
+        }
+        if (body) {
+            newPost.body = body;
+        }
+        if (imageUrl) {
+            newPost.media = {
+                url: imageUrl
+            };
+        }
+
+        createPost(newPost);
+        createPostForm.reset();
+    });
+
 });
 
 
