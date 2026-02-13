@@ -30,6 +30,39 @@ export function renderPosts(posts, container) {
         postBody.textContent = post.body || "";
         anchor.href = `post.html?id=${post.id}`;
         
+        if (post.author) {
+            const authorSection = document.createElement("div");
+            const authorName = document.createElement("p");
+    
+             if(post.author.avatar?.url) {
+                const avatar = document.createElement("img");
+                avatar.src = post.author.avatar.url;
+                avatar.alt = post.author.avatar.alt || "Author Avatar";
+                avatar.className = "author-avatar";
+                authorSection.appendChild(avatar);
+            }
+    
+            authorSection.className = "post-author";
+            authorName.textContent = post.author.name || "Unknown";
+            authorSection.appendChild(authorName);
+    
+            postCard.appendChild(authorSection);
+        }
+
+        const username = localStorage.getItem("username");
+
+        if (post.author?.name === username) {
+            const editButton = document.createElement("button");
+            editButton.className = "edit-button";
+            editButton.textContent = "Edit";
+            postCard.appendChild(editButton);
+
+            editButton.addEventListener("click", (e) => {
+                e.preventDefault();
+                window.location.href = `../editPost.html?id=${post.id}`;
+            })
+        }
+    
         postCard.appendChild(postTitle);
         postCard.appendChild(postBody);
         anchor.appendChild(postCard);

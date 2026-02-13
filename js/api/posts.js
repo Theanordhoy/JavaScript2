@@ -17,7 +17,7 @@ function getHeaders() {
 
 //Get all posts
 export async function getAllPosts() {
-    const response = await fetch(BASE_URL, {
+    const response = await fetch(`${BASE_URL}?_author=true`, {
         headers: getHeaders()
     });
 
@@ -41,6 +41,7 @@ export async function getSinglePost(postId) {
 
     const data = await response.json();
     return data.data;
+    
 }
 
 //Search posts
@@ -70,6 +71,22 @@ export async function createPost(postData) {
 
     if (!response.ok) {
         throw new Error("Failed to create post.")
+    }
+
+    const data = await response.json();
+    return data.data;
+}
+
+// Edit post 
+export async function editPost(postId, postData) {
+    const response = await fetch(`${BASE_URL}/${postId}`, {
+        method: "PUT",
+        headers: getHeaders(),
+        body: JSON.stringify(postData)
+    });
+
+    if (!response.ok) {
+        throw new Error("Failed to edit post.")
     }
 
     const data = await response.json();
