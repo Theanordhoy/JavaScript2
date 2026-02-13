@@ -67,8 +67,6 @@ export function renderSinglePost(post, container) {
     postMeta.className = "post-meta";
     postComments.className = "post-comments";
     postCommentsIcon.className = "fa-regular fa-comment";
-    postReactions.className = "post-reactions";
-    postReactionsIcon.className = "fa-regular fa-heart";
     postDate.className = "post-date";
     postDateIcon.className = "fa-regular fa-clock";
 
@@ -76,8 +74,32 @@ export function renderSinglePost(post, container) {
     postComments.appendChild(postCommentsIcon);
     postComments.append(`${post._count?.comments || 0}`);
 
+    //Reactions
+    postReactions.className = "post-reactions";
+    postReactions.style.cursor = "pointer";
+    postReactions.classList.add("reaction-button");
+
+    const currentUser = localStorage.getItem("username");
+
+    //Deafult icon
+    postReactionsIcon.className = "fa-regular fa-face-smile"
+
+    //Find reaction
+    const smileReaction = post.reactions?.find(r => r.symbol === "👍");
+
+    //Check if current user exists in reactors
+    const hasReacted = smileReaction?.reactors?.some (
+        username => username === currentUser
+    );
+      
+    if (hasReacted) {
+        postReactionsIcon.className = "fa-solid fa-face-smile";
+    }
+
     postReactions.appendChild(postReactionsIcon);
     postReactions.append(`${post._count?.reactions || 0}`);
+
+    //
 
     postDate.appendChild(postDateIcon);
     postDate.append(`${new Date(post.created).toLocaleDateString()}`);
@@ -87,44 +109,132 @@ export function renderSinglePost(post, container) {
     postMeta.appendChild(postDate);
 
     postCard.appendChild(postMeta);
-   
 
-    //Comments list
+    
+    //Comments section 
         const commentsSection = document.createElement("div");
-        const commentsTitle = document.createElement("h3")
-
         commentsSection.className = "comments-section";
-        commentsTitle.textContent = "Comments";
 
+        const commentsTitle = document.createElement("h3");
+        commentsTitle.textContent = "Comments";
         commentsSection.appendChild(commentsTitle);
 
-        if (post.comments?.length) {
-            post.comments.forEach(comment => {
+        //Comment form (main form)
+        const commentForm = document.createElement("form");
+        commentForm.className = "comment-form";
+
+        const commentInput = document.createElement("textarea");
+        commentInput.className = "comment-input";
+        commentInput.placeholder = "Write a comment...";
+        commentInput.required = true;
+        commentInput.id = "commentInput";
+
+        const label = document.createElement("label");
+        label.textContent = "Write a comment";
+        label.setAttribute("for", "commentInput");
+        label.className = "sr-only";
+
+        const commentButton = document.createElement("button");
+        commentButton.className = "comment-button";
+        commentButton.type = "submit";
+        commentButton.textContent = "Post";
+
+        commentForm.appendChild(label);
+        commentForm.appendChild(commentInput);
+        commentForm.appendChild(commentButton);
+        commentsSection.appendChild(commentForm);
+
+        //Group commments
+        const topLevelComments = post.comments?.filter(c => !c.replyToId);
+        const replies = post.comments?.filter(c => c.replyToId);
+
+        //Render top level comments
+        topLevelComments?.forEach(comment => {
+            const commentItem = document.createElement("div");
+            commentItem.className = "comment-item";
+            commentItem.dataset.commentId = comment.id;
+
+              
+         //Avatar
+         const commentHeader = document.createElement("div");
+         commentHeader.className = "comment-header";
+
+             if (comment.author?.avatar?.url) {
+                const avatar = document.createElement("img");
+                avatar.src = comment.author.avatar.url;
+                avatar.alt = comment.author.avatar.alt || "User avatar";
+                avatar.className = "comment-avatar";
+                commentHeader.appendChild(avatar);
+            }
+
+            const authorName = document.createElement("span");
+            authorName.className = "comment-author";
+            authorName.textContent = comment.author?.name || "Anonymous";
+
+            commentHeader.appendChild(authorName);
+            commentItem.appendChild(commentHeader);
+
+            const body = document.createElement("p");
+            body.className = "comment-body";
+            body.textContent = comment.body;
+            commentItem.appendChild(body);
+
+            //Replybutton
+            const replyButton = document.createElement("button");
+            replyButton.textContent = "Reply";
+            replyButton.className = "reply-button";
+            commentItem.appendChild(replyButton);
+
+            //Reply container
+            const replyContainer = document.createElement("div");
+            replyContainer.className = "reply-container";
+
+            const childReplies = replies?.filter(r => r.replyToId === comment.id);
+
+            childReplies?.forEach(reply => {
+                const replyItem = document.createElement("div");
+                replyItem.className = "reply-item";
+
+                const replyHeader = document.createElement("div");
+                replyHeader.className = "comment-header";
+
+                //Reply avatar
+                if (reply.author?.avatar?.url) {
+                    const replyAvatar = document.createElement("img");
+                    replyAvatar.src = reply.author.avatar.url;
+                    replyAvatar.alt = reply.author.avatar.alt || "User avatar";
+                    replyAvatar.className = "comment-avatar";
+                    replyHeader.appendChild(replyAvatar);
+                   
+                }
+
+                //Author
+                const replyAuthor = document.createElement("span");
+                replyAuthor.className = "comment-author";
+                replyAuthor.textContent = reply.author?.name || "Anonymous";
+                replyHeader.appendChild(replyAuthor);
+
+                replyItem.appendChild(replyHeader);
+
+                //Body
+                const replyBody = document.createElement("p");
+                replyBody.className = "comment-body";
+                replyBody.textContent = reply.body;
+                replyItem.appendChild(replyBody);
                 
-                const commentItem = document.createElement("div");
-                commentItem.className = "comment-item";
-         
-        //Avatar
-        if (comment.author?.avatar?.url) {
-            const avatar = document.createElement("img");
-            avatar.src = comment.author.avatar.url;
-            avatar.alt = comment.author.avatar.alt || "User avatar";
-            avatar.className = "comment-avatar";
-            commentItem.appendChild(avatar);
-        }
+                replyContainer.appendChild(replyItem);
 
-        //Name and comment
-        const text = document.createElement("span");
-        text.textContent = `${comment.author?.name || "Anonymous"}: ${comment.body}`;
+            });
 
-        commentItem.appendChild(text);
-        commentsSection.appendChild(commentItem);
-    });
+            commentItem.appendChild(replyContainer);
+            commentsSection.appendChild(commentItem);
+        })
+
     
-    }  else {
+    if (!post.comments?.length) {
         const noComments = document.createElement("p");
         noComments.textContent = "No comments yet.";
-        commentsSection.appendChild(noComments);
+        commentsSection.appendChild(noComments)
     }
 
     postCard.appendChild(commentsSection);
