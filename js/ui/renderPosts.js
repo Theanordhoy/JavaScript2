@@ -1,3 +1,5 @@
+import { deletePost } from "../api/posts.js";
+
 export function renderPosts(posts, container) {
 
     container.innerHTML = "";
@@ -53,14 +55,31 @@ export function renderPosts(posts, container) {
 
         if (post.author?.name === username) {
             const editButton = document.createElement("button");
+            const deleteButton = document.createElement("button");
             editButton.className = "edit-button";
+            deleteButton.className = "delete-button";
             editButton.textContent = "Edit";
+            deleteButton.textContent = "Delete";
             postCard.appendChild(editButton);
+            postCard.appendChild(deleteButton);
 
             editButton.addEventListener("click", (e) => {
                 e.preventDefault();
                 window.location.href = `../editPost.html?id=${post.id}`;
-            })
+            });
+
+            deleteButton.addEventListener("click", async (e) => {
+                e.preventDefault();
+                if (confirm("Are you sure you want to delete this post?")) {
+                    try {
+                        await deletePost(post.id);
+                        postCard.remove();
+                    } catch (error) {
+                        console.error("Error deleting post:", error);
+                        alert("Failed to delete post. Please try again.");
+                    }
+                }
+            });
         }
     
         postCard.appendChild(postTitle);

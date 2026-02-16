@@ -12,7 +12,6 @@ async function  fetchPosts() {
     }
 }
 
-
 document.addEventListener("DOMContentLoaded", () => {
     const searchInput = document.getElementById("searchPosts");
     const searchButton = document.getElementById("searchButton");
@@ -70,7 +69,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const title = document.getElementById("postTitle").value.trim();
         const body = document.getElementById("postBody").value.trim();
         const imageUrl = document.getElementById("postImageUrl").value.trim();
-
         
         if (!title) {
             alert("Title is required to create a post.");
@@ -92,7 +90,6 @@ document.addEventListener("DOMContentLoaded", () => {
         createPostForm.reset();
         fetchPosts()
     });
-
     
 });
 
