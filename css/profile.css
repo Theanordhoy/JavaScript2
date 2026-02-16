@@ -1,0 +1,28 @@
+.profile-container {
+    margin: 0 auto;;
+
+}
+
+.profile-banner {
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+}
+
+.profile-user-row {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 20px;
+}
+
+.profile-avatar {
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+}
+
+.profile-summary {
+    font-family: var(--primary-font);
+    padding: 20px;
+}
