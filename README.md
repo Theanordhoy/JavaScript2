@@ -27,26 +27,28 @@ and react to a post.
 ---
 
 ## **Built With**
--HTML
+- HTML
 
--CSS
+- CSS
 
--Javascript Vanilla 
+- Vanilla JavaScript (ES6 Modules)
+
+- Noroff Social API (v2)
 
 ---
 
 ## **Installation**
-
+Follow this steps to run the project locally
 1. Clone the repository
 
 ```bash
-  git clone
+  git clone https://github.com/Theanordhoy/JavaScript2.git
 ```
 
 2. Navigate to the project folder
 
 ```
- cd 
+ cd JavaScript2
 ```
 
 3. Open the project in code editor (VS Code)
@@ -63,6 +65,14 @@ and react to a post.
 ---
 
 ## **Usage**
+
+After starting the project:
+- Register or log in to your account
+- View all posts in the feed
+- Click on a post to view it individually, comment, react and reply.
+- Visit your profile page to see your posts, how many followers and following. 
+- Visit other users profiles by clicking their name, see their posts.
+- Create, edit and delete your own posts. 
 
 
 
