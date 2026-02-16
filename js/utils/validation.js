@@ -12,6 +12,11 @@ export function isValidName(name) {
     return { valid: true, message: "" };
 }
 
+/**
+ * This function checks if the email is valid and ends with 'stud.noroff.no'.
+ * @param {string} email - The email address to validate.
+ * @returns {{valid: boolean, message: string}} - An object indicating if the email is valid and an error message if it's not. Check if the email is a valid Noroff student email.
+ */
 export function isValidEmail(email) {
     const trimmed = email.trim();
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
