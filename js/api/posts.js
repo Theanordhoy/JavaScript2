@@ -16,6 +16,16 @@ function getHeaders() {
 }
 
 //Get all posts
+/**
+ * This function fetches all posts from the API, including author information. It returns an array of post objects.
+ * @async
+ * @returns {Promise<Array<Object>>} - A promise that resolves to an array of post objects.
+ * @throws {Error} - Throws an error if the fetch request fails.
+ * 
+ * @example
+ * const posts = await getAllPosts();
+ * console.log(posts);
+ */
 export async function getAllPosts() {
     const response = await fetch(`${BASE_URL}?_author=true`, {
         headers: getHeaders()
