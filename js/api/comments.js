@@ -52,7 +52,7 @@ export async function reactToPost(postId) {
     }
 
     const response = await fetch(
-        `${BASE_URL}/posts/${postId}/react/👍`,
+        `${BASE_URL}/posts/${postId}/react/🙂`,
         {
             method: "PUT",
             headers: {

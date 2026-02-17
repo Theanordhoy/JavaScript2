@@ -82,8 +82,8 @@ export function renderSinglePost(post, container) {
 
     const currentUser = localStorage.getItem("username");
 
-    //Find reaction object
-    const smileReaction = post.reactions?.find(r => r.symbol === "👍");
+    //Find reaction object that matches the symbol. 
+    const smileReaction = post.reactions?.find(r => r.symbol === "🙂");
 
     //Check if current user has reacted
     const hasReacted = smileReaction?.reactors?.some (
@@ -149,7 +149,9 @@ export function renderSinglePost(post, container) {
     commentsSection.appendChild(commentForm);
 
     //Comment rendering............//
+    //Filter out top-level comments (those that are not replies).These comments do not have a replyToId, they are not responding to another comment. 
     const topLevelComments = post.comments?.filter(c => !c.replyToId);
+    //Filter out replies (comments that are responses to antother comment). These comments have a replyToId that links them to their parent comment.
     const replies = post.comments?.filter(c => c.replyToId);
 
     //Render top level comments
@@ -192,7 +194,7 @@ export function renderSinglePost(post, container) {
         //Reply container.........../
         const replyContainer = document.createElement("div");
         replyContainer.className = "reply-container";
-
+        //Find all replies that belong to the current top-level comment. A reply belongs to this comment if its replyTod matches to vomments id. 
         const childReplies = replies?.filter(r => r.replyToId === comment.id);
 
         childReplies?.forEach(reply => {
