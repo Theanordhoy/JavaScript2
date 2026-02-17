@@ -1,9 +1,8 @@
 import { renderPosts } from "./renderPosts.js";
+import { followUser, unfollowUser, getProfile } from "../api/profiles.js";
 
 export function renderProfile(profile, container) {
     container.innerHTML = "";
-
-    const loggedInUser = localStorage.getItem("username");
 
     //Profile header
     const header = document.createElement("div");
@@ -45,6 +44,38 @@ export function renderProfile(profile, container) {
         bio.className = "profile-bio";
         header.appendChild(bio);
     }
+
+    // Follow/unfollow button
+    const loggedInUser = localStorage.getItem("username");
+
+    // Only show follow/unfollow button if viewing someone else's profile
+    if(profile.name !== loggedInUser) {
+        const followButton = document.createElement("button");
+        followButton.className = "follow-button";
+        // Check if the logged-in user is already following the profile with some(). Checks if at least one follower matches the logged in user and returns true when it finds one. 
+        const isFollowing = profile.followers?.some(follower => follower.name === loggedInUser);
+        followButton.textContent = isFollowing ? "Unfollow" : "Follow";
+        header.appendChild(followButton);
+        
+        // Event listener for follow/unfollow button
+        followButton.addEventListener("click", async () => {
+            try {
+                if (followButton.textContent === "Unfollow") {
+                    await unfollowUser(profile.name);
+                    followButton.textContent = "Follow";
+                }
+                else {
+                    await followUser(profile.name);
+                    followButton.textContent = "Unfollow";
+                }
+                window.location.reload();
+            } catch (error) {
+                console.error("Error updating follow status:", error);
+                alert("Failed to update follow status. Please try again.");
+            }
+        });
+    } 
+   
 
     //Summary (posts, followers, following)
     const summary = document.createElement("div");

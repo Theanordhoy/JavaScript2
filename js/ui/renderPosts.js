@@ -113,7 +113,8 @@ export function renderPosts(posts, container) {
             postCard.appendChild(postImage);
         }
 
-        postCard.addEventListener("click", () => {
+        postCard.addEventListener("click", (e) => {
+            if (e.target.closest("button") || e.target.closest("a")) return;
             window.location.href = `post.html?id=${post.id}`;
         });
 
