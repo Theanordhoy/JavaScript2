@@ -29,7 +29,6 @@ export function renderPosts(posts, container) {
         const postReactionsIcon = document.createElement("i");
         const postDate = document.createElement("span");
         const postDateIcon = document.createElement("i");
-        const anchor = document.createElement("a");
 
         postCard.className = "post-card";
         postTitle.className = "post-title";
@@ -44,11 +43,10 @@ export function renderPosts(posts, container) {
 
         postTitle.textContent = post.title || "Untitled Post";
         postBody.textContent = post.body || "";
-        anchor.href = `post.html?id=${post.id}`;
         
         if (post.author) {
             const authorSection = document.createElement("div");
-            const authorName = document.createElement("p");
+            const authorName = document.createElement("a");
     
              if(post.author.avatar?.url) {
                 const avatar = document.createElement("img");
@@ -60,6 +58,7 @@ export function renderPosts(posts, container) {
     
             authorSection.className = "post-author";
             authorName.textContent = post.author.name || "Unknown";
+            authorName.href = `profile.html?name=${post.author.name}`;
             authorSection.appendChild(authorName);
     
             postCard.appendChild(authorSection);
@@ -98,7 +97,6 @@ export function renderPosts(posts, container) {
     
         postCard.appendChild(postTitle);
         postCard.appendChild(postBody);
-        anchor.appendChild(postCard);
 
         if (post.tags?.length) {
             const postTags = document.createElement("p");
@@ -115,6 +113,10 @@ export function renderPosts(posts, container) {
             postCard.appendChild(postImage);
         }
 
+        postCard.addEventListener("click", () => {
+            window.location.href = `post.html?id=${post.id}`;
+        });
+
         postComments.appendChild(postCommentsIcon);
         postComments.append(` ${post._count.comments}`);
         postReactions.appendChild(postReactionsIcon);
@@ -125,7 +127,7 @@ export function renderPosts(posts, container) {
         postMeta.appendChild(postReactions);
         postMeta.appendChild(postDate);
         postCard.appendChild(postMeta);
-        container.appendChild(anchor);
+        container.appendChild(postCard);
     });
 }
 
