@@ -47,7 +47,8 @@ h2,
     font-family: var(--secondary-font);
 }
 
-p {
+p,
+.auth-form {
     font-family: var(--primary-font);
 }
 
@@ -182,6 +183,32 @@ i {
     width: 20px;
 }
 
+/* Button */
+.comment-button,
+.auth-button {
+    font-family: var(--secondary-font);
+    font-weight: var(--font-weight-medium);
+    font-size: var(--font-size-button);
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    border: none;
+    cursor: pointer;
+    border-radius: 6px;
+    padding: 10px 12px;
+}
+
+.comment-button:hover,
+.auth-button:hover {
+    background-color: var(--hoover-color);
+}
+
+/* Error message */
+.error-message {
+    color: var(--error-color);
+    font-size: var(--font-size-input);
+
+}
+
 /* Tablet and Desktop */
 @media (min-width: 768px) {
     /* Header */
@@ -202,5 +229,9 @@ i {
     .navbar {
         justify-content: flex-start;
         padding: 0 40px;
+    }
+
+    .auth-form {
+        width: 500px;
     }
 }
