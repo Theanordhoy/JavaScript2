@@ -68,6 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const title = document.getElementById("postTitle").value.trim();
         const body = document.getElementById("postBody").value.trim();
+        const tags = document.getElementById("postTags").value.trim();
         const imageUrl = document.getElementById("postImageUrl").value.trim();
         
         if (!title) {
@@ -80,17 +81,20 @@ document.addEventListener("DOMContentLoaded", () => {
         if (body) {
             newPost.body = body;
         }
+        if (tags) {
+            newPost.tags = tags.split(" ").map(tag => tag.trim()).filter(tag => tag);
+            
+        }
         if (imageUrl) {
             newPost.media = {
                 url: imageUrl
             };
         }
-
+       
        await createPost(newPost);
         createPostForm.reset();
         fetchPosts()
     });
-    
 });
 
 fetchPosts();
