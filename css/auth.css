@@ -26,10 +26,6 @@ input {
     margin-top: 10px;
 }
 
-.auth-h1 {
-    text-align: center;
-}
-
 .auth-extra-button {
     color: var(--text-color);
     font-weight: var(--font-weight-semibold);

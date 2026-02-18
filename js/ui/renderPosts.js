@@ -119,11 +119,11 @@ export function renderPosts(posts, container) {
         });
 
         postComments.appendChild(postCommentsIcon);
-        postComments.append(` ${post._count.comments}`);
+        postComments.append(`${post._count.comments}`);
         postReactions.appendChild(postReactionsIcon);
-        postReactions.append(` ${post._count.reactions}`);
+        postReactions.append(`${post._count.reactions}`);
         postDate.appendChild(postDateIcon);
-        postDate.append(` ${new Date(post.created).toLocaleDateString()}`);
+        postDate.append(`${new Date(post.created).toLocaleDateString()}`);
         postMeta.appendChild(postComments);
         postMeta.appendChild(postReactions);
         postMeta.appendChild(postDate);

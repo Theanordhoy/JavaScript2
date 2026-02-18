@@ -30,22 +30,26 @@
         </nav>
     </header>
     <main>
-        <form>
-            <label for="searchPosts" class="sr-only">Search for posts:</label>
-            <input type="search" id="searchPosts" name="q" placeholder="Search posts...">
-            <button id="searchButton" type="button">Search</button>
-        </form>
         <h1>Feed</h1>
-        <button id="createPostButton">+ Create new post</button>
-        <form id="createPostForm" class="create-post-form">
-            <label for="postTitle" class="sr-only">Post Title</label>
-            <input type="text" id="postTitle" name="title" placeholder="Post title" required>
-            <label for="postBody" class="sr-only">Post content</label>
-            <textarea id="postBody" name="body" placeholder="What's on your mind?" required></textarea>
-            <label for="postImageUrl" class="sr-only">Image URL(optional)</label>
-            <input type="url" id="postImageUrl" name="image" placeholder="Image URL (optional)">
-            <button type="submit">Publish post</button>
-        </form>
+        <div class="feed-actions">
+            <form class="search-form">
+                <label for="searchPosts" class="sr-only">Search for posts:</label>
+                <input type="search" id="searchPosts" name="q" placeholder="Search posts..." class="search-input">
+                <button id="searchButton" type="button" class="search-button">Search</button>
+            </form>
+            <div>
+                <form id="createPostForm" class="create-post-form">
+                    <label for="postTitle" class="sr-only">Post Title</label>
+                    <input type="text" id="postTitle" name="title" class="create-post-input" placeholder="Post title" required>
+                    <label for="postBody" class="sr-only">Post content</label>
+                    <textarea id="postBody" name="body" class="create-post-input create-post-input-body" placeholder="What's on your mind?" required></textarea>
+                    <label for="postImageUrl" class="sr-only">Image URL(optional)</label>
+                    <input type="url" id="postImageUrl" class="create-post-input" name="image" placeholder="Image URL (optional)">
+                    <button type="submit" class="publish-button">Publish post</button>
+                </form>
+                <button id="createPostButton" class="create-post-button">+ Create new post</button>
+            </div>
+        </div>
         <div id="postsContainer" class="post-container"></div>
     </main>
     <footer>
