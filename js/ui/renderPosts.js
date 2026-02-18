@@ -78,7 +78,7 @@ export function renderPosts(posts, container) {
 
             editButton.addEventListener("click", (e) => {
                 e.preventDefault();
-                window.location.href = `../editPost.html?id=${post.id}`;
+                window.location.href = `editPost.html?id=${post.id}`;
             });
 
             deleteButton.addEventListener("click", async (e) => {
