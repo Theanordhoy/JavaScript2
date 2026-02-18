@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Show create post form when button is clicked
     createPostButton.addEventListener("click", () => {
         if (createPostForm.style.display === "none") {
-            createPostForm.style.display = "block";
+            createPostForm.style.display = "flex";
             createPostButton.textContent = "Cancel";
         } else {
             createPostForm.style.display = "none";
