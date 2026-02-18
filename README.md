@@ -71,7 +71,7 @@ After starting the project:
 - View all posts in the feed
 - Click on a post to view it individually, comment, react and reply.
 - Visit your profile page to see your posts, how many followers and following. 
-- Visit other users profiles by clicking their name, see their posts.
+- Visit other users profiles by clicking their name, view their posts.
 - Create, edit and delete your own posts. 
 
 
@@ -82,13 +82,24 @@ This project is licensed under the MIT License.
 ---
 
 ## **Contact**
+Thea Nordhøy Kristensen
+
+thea.n.k@hotmail.com
+
+Emilie Sofie Fosmo
+
+emilie.fosmo@hotmail.com
 
 --- 
 
 ## **Resources/References**
 
-### Favicon
+### Fonts
+[Fonts GoogleFonts](https://fonts.google.com/)
 
+### Favicon
+[Favicon.io - Generator](https://favicon.io/)
 
 ### Icons
+[Icons Fontawesome](https://fontawesome.com/)
 
