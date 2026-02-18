@@ -46,6 +46,22 @@
     
 }
 
+.follow-button {
+    font-family: var(--secondary-font);
+    font-weight: var(--font-weight-medium);
+    font-size: var(--font-size-button);
+    background-color: var(--primary-color);
+    color: var(--color-white);
+    border: none;
+    cursor: pointer;
+    padding: 6px 8px;
+    border-radius: 6px;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    
+}
+
 
 /* Tablet and Desktop */
 @media (min-width: 768px) {
