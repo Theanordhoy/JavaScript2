@@ -236,7 +236,7 @@ i {
     font-weight: var(--font-weight-medium);
     font-size: var(--font-size-button);
     background-color: var(--primary-color);
-    color: var(--secondary-color);
+    color: var(--color-white);
     border: none;
     cursor: pointer;
     border-radius: 6px;
