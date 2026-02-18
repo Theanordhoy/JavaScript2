@@ -59,7 +59,7 @@ form.addEventListener("submit", async function (e) {
         await registerUser(userData);
 
         alert("Registration was successfull, you can now log in!")
-        window.location.href = "../../index.html";
+        window.location.href = "index.html";
 
     } catch (error) {
         console.error("Registration error:", error);
