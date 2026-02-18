@@ -51,7 +51,9 @@ h2,
 }
 
 p,
-.auth-form {
+.auth-form,
+.search-input,
+.create-post-input {
     font-family: var(--primary-font);
 }
 
@@ -136,13 +138,11 @@ footer {
 }
 
 /*All pages*/
-
 h1 {
     text-align: center;
 }
 
 /*Feed, post and profile*/
-
 .post-author {
     display: flex;
     align-items: center;
@@ -160,7 +160,6 @@ h1 {
 
 .post-body {
     word-break: break-all;
-    padding-left: 10px;
 }
 
 .post-card {
@@ -178,9 +177,16 @@ h1 {
 .post-title {
     font-weight: var(--font-weight-semibold);
     margin-top: 0;
-    padding-left: 10px;
+    border-top: 1px solid grey;
+    padding-top: 8px;
 }
 
+.post-tags,
+.post-body,
+.post-title,
+.post-meta {
+    padding-left: 10px;
+}
 
 .post-title,
 .post-meta {
@@ -203,7 +209,6 @@ i {
     margin-right: 5px;
 }
 
-
 .edit-button,
 .delete-button {
     border: 1px solid var(--primary-color);
@@ -222,7 +227,11 @@ i {
 /* Button */
 .comment-button,
 .auth-button,
-.logout-button {
+.logout-button,
+.search-button,
+.publish-button,
+.create-post-button, 
+.save-button {
     font-family: var(--secondary-font);
     font-weight: var(--font-weight-medium);
     font-size: var(--font-size-button);
@@ -231,11 +240,20 @@ i {
     border: none;
     cursor: pointer;
     border-radius: 6px;
+}
+
+.comment-button,
+.auth-button,
+.logout-button {
     padding: 10px 12px;
 }
 
 .comment-button:hover,
-.auth-button:hover {
+.auth-button:hover,
+.search-button:hover,
+.publish-button:hover,
+.create-post-button:hover, 
+.save-button:hover {
     background-color: var(--hoover-color);
 }
 
@@ -283,4 +301,5 @@ i {
         height: 400px;
         
     }
+
 }
