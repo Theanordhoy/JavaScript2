@@ -33,7 +33,7 @@ if (logoutButton) {
         try {
             localStorage.removeItem("accessToken");
             setTimeout(() => {
-                window.location.href = "../../index.html";
+                window.location.href = "index.html";
             }, 300);
         } catch (error) {
             console.error("Logout failed:", error);
