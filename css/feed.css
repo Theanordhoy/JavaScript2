@@ -34,35 +34,15 @@
 .search-input {
     padding: 5px 10px;
     border-radius: 6px;
+}
+
+.search-input,
+.create-post-input {
     border: 1px solid var(--text-color);
 }
 
 .create-post-input-body {
     height: 100px;
-}
-
-/* OBS MÅ LEGGES I MAIN */
-.search-input,
-.create-post-input {
-    font-family: var(--primary-font);
-}
-
-.search-button,
-.publish-button,
-.create-post-button {
-    font-family: var(--secondary-font);
-    font-size: var(--font-size-button);
-    background-color: var(--primary-color);
-    color: var(--color-white);
-    border: none;
-    cursor: pointer;
-    border-radius: 6px;
-}
-
-.search-button:hover,
-.publish-button:hover,
-.create-post-button:hover {
-    background-color: var(--hoover-color);
 }
 
 /* Tablet and Desktop */
