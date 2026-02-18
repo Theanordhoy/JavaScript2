@@ -50,7 +50,7 @@ form.addEventListener("submit", async function (e) {
         localStorage.setItem("username", data.data.name);
 
         alert("Login successful!");
-        window.location.href = "../../feed.html";
+        window.location.href = "feed.html";
 
     } catch (error) {
          console.error("Login request failed:", error);
