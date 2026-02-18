@@ -21,7 +21,8 @@ export function renderSinglePost(post, container) {
             authorSection.appendChild(avatar);
         }
         //render auhtor name, if missing fallback
-        const authorName = document.createElement("p");
+        const authorName = document.createElement("a");
+        authorName.href = `profile.html?name=${post.author.name}`;
         authorName.textContent = post.author.name || "Unknown";
         authorSection.appendChild(authorName);
 
