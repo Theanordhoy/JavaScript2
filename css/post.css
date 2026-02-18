@@ -9,7 +9,12 @@
     font-family: var(--primary-font);
 }
 
-.comment-form textarea {
+.comment-form {
+    margin: 0 10px;
+}
+
+.comment-form textarea,
+.comment-input {
     flex: 1;
     min-width: 0;
     font-family: var(--primary-font);
@@ -28,4 +33,26 @@
 .comment-header {
     display: flex;
     align-items: center;
+    gap: 8px;
 }
+
+h3 {
+    font-family: var(--secondary-font);
+    padding-left: 10px;
+}
+
+/*Reply*/
+
+.reply-form {
+    display: flex;
+    gap: 10px;
+}
+
+.reply-button {
+    border: 1px solid var(--primary-color);
+    border-radius: 6px;
+    padding: 4px 8px;
+    margin-bottom: 10px;
+}
+
+

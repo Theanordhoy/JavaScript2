@@ -103,7 +103,7 @@ function attachReplyListener() {
 
             const submitBtn = document.createElement("button");
             submitBtn.type = "submit";
-            submitBtn.textContent = "Reply";
+            submitBtn.textContent = "Post";
             submitBtn.className = "comment-button";
 
             replyForm.appendChild(textarea);
