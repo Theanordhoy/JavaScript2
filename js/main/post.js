@@ -57,7 +57,6 @@ function attachCommentListener() {
 
         const textarea = form.querySelector("textarea");
         const body = textarea.value.trim();
-
         
         if (!body) return;
 
@@ -99,8 +98,6 @@ function attachReplyListener() {
             textarea.className = "comment-input";
             textarea.id = "textareaId";
 
-
-
             const submitBtn = document.createElement("button");
             submitBtn.type = "submit";
             submitBtn.textContent = "Post";
@@ -124,11 +121,11 @@ function attachReplyListener() {
                     await createComment(postId, body, replyToId);
                     await fetchSinglePost();
                 } catch (error) {
-                    console.error("Reply failed:", error)
+                    console.error("Reply failed:", error);
                 }
             })
         })
-    })
+    });
 }
 fetchSinglePost();
 

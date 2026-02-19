@@ -114,7 +114,6 @@ export function renderSinglePost(post, container) {
     postMeta.appendChild(postDate);
 
     postCard.appendChild(postMeta);
-
     
     //Comments section....................//
     const commentsSection = document.createElement("div");
@@ -160,7 +159,6 @@ export function renderSinglePost(post, container) {
         const commentItem = document.createElement("div");
         commentItem.className = "comment-item";
         commentItem.dataset.commentId = comment.id;
-
               
         //Avatar + name
         const commentHeader = document.createElement("div");
@@ -195,7 +193,7 @@ export function renderSinglePost(post, container) {
         //Reply container.........../
         const replyContainer = document.createElement("div");
         replyContainer.className = "reply-container";
-        //Find all replies that belong to the current top-level comment. A reply belongs to this comment if its replyTod matches to vomments id. 
+        //Find all replies that belong to the current top-level comment. A reply belongs to this comment if its replyToId matches to comments id. 
         const childReplies = replies?.filter(r => r.replyToId === comment.id);
 
         childReplies?.forEach(reply => {
@@ -212,7 +210,6 @@ export function renderSinglePost(post, container) {
                     replyAvatar.alt = reply.author.avatar.alt || "User avatar";
                     replyAvatar.className = "comment-avatar";
                     replyHeader.appendChild(replyAvatar);
-                   
             }
 
             //Author

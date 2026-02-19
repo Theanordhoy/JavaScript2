@@ -16,7 +16,6 @@ async function loadEditPost() {
 
         const post = await getSinglePost(postId);
 
-
         renderEditPost(post, container, publishEditedPost);
     
     } catch (error) {

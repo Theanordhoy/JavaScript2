@@ -2,7 +2,6 @@
 import {isValidName, isValidEmail, isValidPassword} from "../utils/validation.js";
 import { registerUser } from "../api/auth.js";
 
-
 //DOM references
 const form = document.getElementById("registerForm");
 
@@ -54,11 +53,10 @@ form.addEventListener("submit", async function (e) {
     password: passwordInput.value.trim()
     };
 
-
     try {
         await registerUser(userData);
 
-        alert("Registration was successfull, you can now log in!")
+        alert("Registration was successfull, you can now log in!");
         window.location.href = "index.html";
 
     } catch (error) {

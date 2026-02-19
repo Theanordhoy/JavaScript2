@@ -17,7 +17,9 @@ function getHeaders() {
 
 //Get all posts
 /**
- * This function fetches all posts from the API, including author information. It returns an array of post objects.
+ * This function fetches all posts from the API, including author information. 
+ * It returns a promise that resolves to an array of post objects.
+ * Throws an error if the fetch request fails.
  * @async
  * @returns {Promise<Array<Object>>} - A promise that resolves to an array of post objects.
  * @throws {Error} - Throws an error if the fetch request fails.
@@ -51,7 +53,6 @@ export async function getSinglePost(postId) {
 
     const data = await response.json();
     return data.data;
-    
 }
 
 //Search posts
@@ -59,7 +60,6 @@ export async function searchPosts(query) {
     const response = await fetch(
         `${BASE_URL}/search?q=${encodeURIComponent(query)}`,
         { headers: getHeaders()
-
     });
 
     if (!response.ok)  {
@@ -69,7 +69,6 @@ export async function searchPosts(query) {
     const data = await response.json();
     return data.data;
 }
-
 
 //Create post
 export async function createPost(postData) {

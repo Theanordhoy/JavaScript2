@@ -76,7 +76,6 @@ export function renderProfile(profile, container) {
         });
     } 
    
-
     //Summary (posts, followers, following)
     const summary = document.createElement("div");
     summary.className = "profile-summary";
