@@ -1,5 +1,4 @@
 :root {
-
     --primary-font: 'Inter', sans-serif;
     --secondary-font: 'Poppins', sans-serif;
 
@@ -13,7 +12,6 @@
     --font-weight-semibold: 600;
     --font-weight-medium: 500;
     --font-weight-regular: 400;
-    
 
     --primary-color: #0B3D91;
     --secondary-color: #e6e9ec;
@@ -267,7 +265,6 @@ i {
 .error-message {
     color: var(--error-color);
     font-size: var(--font-size-input);
-
 }
 
 /* Tablet and Desktop */
@@ -305,7 +302,5 @@ i {
     .post-image {
         width: 600px;
         height: 400px;
-        
     }
-
 }

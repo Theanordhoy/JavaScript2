@@ -33,7 +33,6 @@ export async function getProfile(name) {
 export async function getProfilePosts(name) {
     const response = await fetch(`${BASE_URL}/${name}/posts?_author=true&_comments=true&_reactions=true`,
          { headers: getHeaders()
-
     });
 
     if (!response.ok) {

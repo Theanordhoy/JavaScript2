@@ -3,7 +3,7 @@ import { renderPosts } from "../ui/renderPosts.js";
 
 const postsContainer = document.getElementById("postsContainer");
 
-async function  fetchPosts() {
+async function fetchPosts() {
     try {
         const posts = await getAllPosts();
         renderPosts(posts, postsContainer);
@@ -82,8 +82,8 @@ document.addEventListener("DOMContentLoaded", () => {
             newPost.body = body;
         }
         if (tags) {
+            // Split tags by space, trim them, and filter out any empty tags, and makes the string into an array
             newPost.tags = tags.split(" ").map(tag => tag.trim()).filter(tag => tag);
-            
         }
         if (imageUrl) {
             newPost.media = {

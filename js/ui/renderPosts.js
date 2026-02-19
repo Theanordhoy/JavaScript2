@@ -3,10 +3,10 @@ import { deletePost } from "../api/posts.js";
 /**
  * Renders a list of posts into the specified container. 
  * Clears the container before rendering new posts cards.
- * Each post card includes author, title, body, image url(if availeble), tags and meta information(comments, reactions and date).
+ * Each post card includes author, title, body, image url, tags and meta information(comments, reactions and date).
  * Adds edit and delete buttons for posts created by the logged in user.
  * @param {Array<Object>} posts - An array of post objects to be rendered. Each post object should contain properties like author, title, body, image url, tags and meta information.
- * @param {HTMLElement} container - The DOM element where the posts will be rendered.
+ * @param {HTMLElement} container - The container element where the posts will be rendered.
  * @returns {void} - This function does not return anything. It directly manipulates the DOM to display the posts.
  * 
  * @example

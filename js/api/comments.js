@@ -41,7 +41,6 @@ export async function createComment(postId, body, replyToId = null) {
     return data.data;
 }
 
-
 //React to a post
 export async function reactToPost(postId) {
 
