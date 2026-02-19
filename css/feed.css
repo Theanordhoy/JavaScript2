@@ -45,6 +45,10 @@
     height: 100px;
 }
 
+.post-card {
+    cursor: pointer;
+}
+
 /* Tablet and Desktop */
 @media (min-width: 768px) {
     .feed-actions {
