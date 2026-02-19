@@ -1,6 +1,6 @@
 export function isValidName(name) {
     const trimmed = name.trim();
-    const regex = /^[A-Za-z0-9_]{3,15}$/;
+    const regex = /^[A-Za-z0-9_]{3,15}$/; //Regex generated from ChatGPT. 
 
     if (!regex.test(trimmed)) {
         return {
@@ -19,9 +19,16 @@ export function isValidName(name) {
  */
 export function isValidEmail(email) {
     const trimmed = email.trim();
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; //Regex generated from ChatGPT. 
 
     if (!regex.test(trimmed)) {
+        return {
+            valid: false,
+            message: "Please enter a valid email adress."
+        };
+    }
+
+    if (!trimmed.toLowerCase().endsWith("@stud.noroff.no")) {
         return {
             valid: false,
             message: "Only 'stud.noroff.no' emails are allowed to register."
@@ -29,6 +36,7 @@ export function isValidEmail(email) {
     }
 
     return { valid: true, message: "" };
+     
 }
 
 export function isValidPassword(password) {
