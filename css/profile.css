@@ -59,7 +59,10 @@
     display: block;
     margin: 0 auto;
     margin-bottom: 10px;
-    
+}
+
+.post-card {
+    cursor: pointer;
 }
 
 

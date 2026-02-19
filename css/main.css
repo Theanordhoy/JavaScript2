@@ -142,6 +142,10 @@ h1 {
     text-align: center;
 }
 
+input {
+    font-size: var(--font-size-input);
+}
+
 /*Feed, post and profile*/
 .post-author {
     display: flex;
@@ -214,8 +218,9 @@ i {
     border: 1px solid var(--primary-color);
     border-radius: 6px;
     padding: 4px 8px;
-    margin: 0px 8px 20px 10px;
+    margin: 0px 2px 20px 10px;
     background-color: var(--color-white);
+    cursor: pointer;
 }
 
 /*Single post*/
