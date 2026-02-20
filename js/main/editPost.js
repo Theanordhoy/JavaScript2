@@ -40,7 +40,6 @@ async function publishEditedPost(postId, postData) {
         };
 
         await editPost(postId, editedPostData);
-        console.log("Sending PUT data:", editedPostData);
         window.location.href = `post.html?id=${postId}`;
     } catch (error) {
         console.error("Error editing post:", error);
