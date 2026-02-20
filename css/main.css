@@ -140,7 +140,8 @@ h1 {
     text-align: center;
 }
 
-input {
+input,
+textarea {
     font-size: var(--font-size-input);
 }
 
